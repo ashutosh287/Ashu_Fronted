@@ -22,13 +22,8 @@ import {
   UserOrders,
   OrderSummary,
   ReadyOrderSummary,
-  Logout,
-  ResetPassword,
   ForgotPassword,
-  ChangePassword,
   UserDashboard,
-  UserProfile,
-  ShopSearch,
   Revenue,
   ThanksReg,
   ContactUs,
@@ -56,9 +51,9 @@ import SellerProtectedRoutes from './SellerProtectedRoutes';
 export default function App() {
   return (
     <BrowserRouter>
-    <ScrollToTop /> 
+      <ScrollToTop />
       <Routes>
-        
+
         {/* 🔓 Public Routes */}
         <Route path="/shop" element={<ShopCards />} />
         <Route path="/shop/:id" element={<ShopPage />} />
