@@ -1,0 +1,19 @@
+@media (max-width: 640px) {
+  .Toastify__toast {
+    font-size: 0.9rem !important;
+    padding: 12px 18px !important;
+    min-height: 55px !important;
+    margin-top: 10px !important;
+    margin-right: 10px !important;
+    width: 80vw !important; /* Wider width for small screen */
+  }
+
+  .Toastify__toast-body {
+    font-size: 0.9rem !important;
+    line-height: 1.4; 
+  }
+
+  .Toastify__close-button {
+    font-size: 1.2rem !important;
+  }
+}

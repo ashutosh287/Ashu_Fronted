@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@keyframes twinkle {
+  0%, 100% { background-color: transparent; }
+  25%, 75% { background-color: #bf57e5; } /* light yellow */
+  50% { background-color: transparent; }
+}
+
+.twinkle {
+  animation: twinkle 1s ease-in-out 2;  /* ⬅️ 2 times blink */
+}
