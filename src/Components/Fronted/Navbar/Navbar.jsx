@@ -6,7 +6,7 @@ import {
   FaGlobe, FaHeadset, FaEnvelope, FaInfoCircle, FaRegUser
 } from 'react-icons/fa';
 import { BsShop } from 'react-icons/bs';
-import Logo from '../../../assets/Packzo123.png';
+import Logo from '../../../assets/chikuchiku.jpg';
 import Shop from '../../Shop/ShopCards';
 import axios from 'axios'; // ✅ import axios
 import { showInfoToast } from '../../ToastifyNotification/Notification'
@@ -50,7 +50,7 @@ export default function Navbar() {
         {/* Welcome Message */}
         <div className="py-2 bg-gradient-to-r from-purple-700 to-indigo-600 border-t border-b border-gray-300">
           <p className="text-sm text-white px-4">
-            "Welcome to Packzo — I'm so glad you're here!"
+            "Welcome to iShop — I'm so glad you're here!"
           </p>
         </div>
 
@@ -122,9 +122,7 @@ export default function Navbar() {
               ) : (
                 <div className="flex items-center text-[16px] text-white space-x-2">
                   <Link to="/signup" className="hover:text-purple-300">Sign Up</Link>
-                  <Link to="/signup" className="hover:text-purple-300">Sign Up</Link>
                   <span className="text-white text-base font-medium">/</span>
-                  <Link to="/login" className="hover:text-purple-300">Login</Link>
                   <Link to="/login" className="hover:text-purple-300">Login</Link>
                 </div>
               )}
