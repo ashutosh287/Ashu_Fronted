@@ -121,9 +121,9 @@ export default function Navbar() {
                 </Link>
               ) : (
                 <div className="flex items-center text-[16px] text-white space-x-2">
-                  <Link to="/register" className="hover:text-purple-300">Sign Up</Link>
+                  <Link to="/signup" className="hover:text-purple-300">Sign Up</Link>
                   <span className="text-white text-base font-medium">/</span>
-                  <Link to="/UserLogin" className="hover:text-purple-300">Login</Link>
+                  <Link to="/login" className="hover:text-purple-300">Login</Link>
                 </div>
               )}
 
