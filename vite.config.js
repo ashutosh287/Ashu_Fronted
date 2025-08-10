@@ -17,7 +17,7 @@ import tailwindcss from '@tailwindcss/vite'
 //         secure: false,
 //         rewrite: (path) => path.replace(/^\/api/, '')
 //       },
-      
+
 //     }
 //   }
 // });
@@ -30,10 +30,10 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'https://ashu-backend.vercel.app/',
+        target: 'https://ashu-backend.vercel.app',
         changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/api/, '')
+        secure: true, // ✅ HTTPS backend ke liye true
+        rewrite: (path) => path.replace(/^\/api/, '') // ✅ /api hata ke backend ko bheje
       },
     }
   }
