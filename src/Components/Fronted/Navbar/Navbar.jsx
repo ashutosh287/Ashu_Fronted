@@ -6,7 +6,7 @@ import {
   FaGlobe, FaHeadset, FaEnvelope, FaInfoCircle, FaRegUser
 } from 'react-icons/fa';
 import { BsShop } from 'react-icons/bs';
-import Logo from '../../../assets/chikuchiku.jpg';
+import Logo from '../../../assets/Packzo.png';
 import Shop from '../../Shop/ShopCards';
 import axios from 'axios'; // ✅ import axios
 import { showInfoToast } from '../../ToastifyNotification/Notification'
