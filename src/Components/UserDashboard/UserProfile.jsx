@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaUser, FaEnvelope, FaPhone } from "react-icons/fa";
+const api = import.meta.env.VITE_BASE_URL;
+
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
@@ -9,7 +11,7 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("/api/user/profile", {
+        const res = await axios.get(`${api}/User/profile`, {
           withCredentials: true, // ✅ So that cookie goes with request
         });
         setUser(res.data);

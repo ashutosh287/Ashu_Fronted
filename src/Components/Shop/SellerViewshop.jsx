@@ -4,6 +4,7 @@ import axios from 'axios';
 const SellerShopView = () => {
   const [shop, setShop] = useState(null);
   const [products, setProducts] = useState([]);
+  
 
   useEffect(() => {
     const token = localStorage.getItem('sellerToken');

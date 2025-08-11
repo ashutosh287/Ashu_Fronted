@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+const api = import.meta.env.VITE_BASE_URL;
+
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -7,7 +9,7 @@ const ProductList = () => {
   // Fetch all published products from backend
   useEffect(() => {
     const fetch = async () => {
-const res = await axios.get(`http://localhost:5005/api/shop-products/${shopId}`);
+const res = await axios.get(`${api}/api/shop-products/${shopId}`);
       setProducts(res.data);
     };
     fetch();
@@ -20,7 +22,7 @@ const res = await axios.get(`http://localhost:5005/api/shop-products/${shopId}`)
 
     try {
       const amount = Number(product.price);
-      await axios.post('http://localhost:5005/orders', {
+      await axios.post(`${api}/orders`, {
         productId: product._id,
         sellerId: product.sellerId,
         buyerName,

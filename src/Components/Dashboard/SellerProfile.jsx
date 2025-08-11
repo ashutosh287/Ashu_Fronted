@@ -6,10 +6,13 @@ const SellerProfile = () => {
   const [seller, setSeller] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const api = import.meta.env.VITE_BASE_URL;
+
+
   useEffect(() => {
     const fetchSeller = async () => {
       try {
-        const { data } = await axios.get("/api/seller/profile", {
+        const { data } = await axios.get(`${api}/api/seller/profile`, {
           withCredentials: true, // ✅ send cookies automatically
         });
         setSeller(data);

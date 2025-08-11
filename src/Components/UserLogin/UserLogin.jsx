@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios'; // Import axios
 import { showSuccessToast, showErrorToast } from '../ToastifyNotification/Notification'
 
+const api = import.meta.env.VITE_BASE_URL;
+
 export default function Login({ setIsLogin }) {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +25,7 @@ export default function Login({ setIsLogin }) {
                 setIsLoading(true);
 
                 const response = await axios.post(
-                    `/api/User/Login`,
+                    `${api}/User/login`,
                     values,
                     { withCredentials: true } // ✅ Send and receive secure HTTP-only cookie
                 );
@@ -58,7 +60,7 @@ export default function Login({ setIsLogin }) {
                 } else if (error.response?.data?.data?.isVerify) {
                     const userId = error.response?.data?.data?.UserId;
                     if (userId) {
-                        navigate(`/api/verify-otp/${userId}`);
+                        navigate(`${api}/verify-otp/${userId}`);
                     } else {
                         showErrorToast("User ID missing for OTP verification");
                     }

@@ -2,13 +2,15 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+const api = import.meta.env.VITE_BASE_URL;
+
 
 const Logout = () => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await axios.post("/api/user/logout", {}, {
+      await axios.post(`${api}/user/logout`, {}, {
         withCredentials: true,
       });
 

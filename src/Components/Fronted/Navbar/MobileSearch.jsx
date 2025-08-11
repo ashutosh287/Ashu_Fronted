@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { IoIosSearch } from "react-icons/io";
+const api = import.meta.env.VITE_BASE_URL;
+
 
 const MobileShopSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -23,7 +25,7 @@ const MobileShopSearch = () => {
   const fetchShops = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`/api/search/shops?search=${searchTerm}`);
+      const res = await axios.get(`${api}/search/search/shops?search=${searchTerm}`);
       setShops(res?.data?.shops || []);
     } catch (error) {
       console.error("Search error", error);

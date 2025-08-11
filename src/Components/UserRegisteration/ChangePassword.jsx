@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { showErrorToast, showSuccessToast } from "../ToastifyNotification/Notification";
+const api = import.meta.env.VITE_BASE_URL;
+
 
 const ChangePassword = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,7 +27,7 @@ const ChangePassword = () => {
   const handleSubmit = async (values, { resetForm, setSubmitting, setStatus }) => {
     try {
       const res = await axios.post(
-        "/api/change-password",
+        `${api}/User/change-password`,
         {
           currentPassword: values.currentPassword,
           newPassword: values.newPassword,

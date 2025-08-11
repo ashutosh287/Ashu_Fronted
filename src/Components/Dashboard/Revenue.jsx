@@ -11,6 +11,10 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+
+const api = import.meta.env.VITE_BASE_URL;
+
+
 const Revenue = () => {
   const [chartData, setChartData] = useState([]);
   const [summary, setSummary] = useState([]);
@@ -24,12 +28,8 @@ const Revenue = () => {
   useEffect(() => {
     const fetchRevenue = async () => {
       try {
-        const token = localStorage.getItem("sellerToken");
-
-        const res = await axios.get("/api/seller/revenue", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        const res = await axios.get(`${api}/api/revenue`, {
+          withCredentials: true, // ✅ send cookies automatically
         });
 
         const formatted = res.data.chartData.map((item) => ({
@@ -55,6 +55,7 @@ const Revenue = () => {
 
     fetchRevenue();
   }, []);
+
 
   if (loading) return <p className="text-center text-gray-500">Loading revenue data...</p>;
 

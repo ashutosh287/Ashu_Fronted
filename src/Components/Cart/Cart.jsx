@@ -3,6 +3,8 @@ import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { showErrorToast } from "../ToastifyNotification/Notification";
+const api = import.meta.env.VITE_BASE_URL;
+
 
 
 const Cart = () => {
@@ -20,10 +22,10 @@ const Cart = () => {
     const checkAuthAndFetch = async () => {
       try {
         // 🔐 Check if user is authenticated
-        await axios.get("/api/check-auth", { withCredentials: true });
+        await axios.get(`${api}/User/check-auth`, { withCredentials: true });
 
         // ✅ Fetch cart after auth passes
-        const res = await axios.get(`/api/cart/${shopId}`, {
+        const res = await axios.get(`${api}/cart/${shopId}`, {
           withCredentials: true,
         });
         setCartItems(res.data);
@@ -53,10 +55,10 @@ const Cart = () => {
 
   const increaseQty = async (itemId) => {
     try {
-      await axios.put(`/api/cart/increase/${itemId}`, {}, {
+      await axios.put(`${api}/cart/increase/${itemId}`, {}, {
         withCredentials: true,
       });
-      const res = await axios.get(`/api/cart/${shopId}`, {
+      const res = await axios.get(`${api}/cart/${shopId}`, {
         withCredentials: true,
       });
       setCartItems(res.data);
@@ -68,21 +70,22 @@ const Cart = () => {
   const decreaseQty = async (itemId, removeDirectly = false) => {
     try {
       const url = removeDirectly
-        ? `/api/cart/decrease/${itemId}?removeDirectly=true`
-        : `/api/cart/decrease/${itemId}`;
+        ? `${api}/cart/decrease/${itemId}?removeDirectly=true`
+        : `${api}/cart/decrease/${itemId}`;
 
       await axios.put(url, {}, {
         withCredentials: true,
       });
 
-      const res = await axios.get(`/api/cart/${shopId}`, {
+      const res = await axios.get(`${api}/cart/${shopId}`, {
         withCredentials: true,
       });
       setCartItems(res.data);
     } catch (err) {
-      console.error("❌ Error decreasing quantity:", err);
+      console.error("❌ Error decreasing quantity:", err.response?.data || err);
     }
   };
+
 
   const removeFromCart = (itemId) => {
     const updated = cartItems.filter(item => item._id !== itemId);

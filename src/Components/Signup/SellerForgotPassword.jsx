@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { showSuccessToast, showErrorToast } from "../ToastifyNotification/Notification";
 import { useNavigate } from "react-router-dom";
+const api = import.meta.env.VITE_BASE_URL;
+
 
 const SellerForgotPassword = () => {
     const navigate = useNavigate();
@@ -18,7 +20,7 @@ const SellerForgotPassword = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            await axios.post("/api/seller/request-otp", { email });
+            await axios.post(`${api}/api/seller/request-otp`, { email });
             showSuccessToast("OTP sent to your email.");
             setStep(2);
         } catch (err) {
@@ -32,7 +34,7 @@ const SellerForgotPassword = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            await axios.post("/api/seller/verify-otp", { email, otp });
+            await axios.post(`${api}/api/seller/verify-otp`, { email, otp });
             showSuccessToast("OTP verified. Please reset your password.");
             setStep(3);
         } catch (err) {
@@ -51,7 +53,7 @@ const SellerForgotPassword = () => {
 
         setLoading(true);
         try {
-            await axios.post("/api/seller/reset-password", {
+            await axios.post(`${api}/api/seller/reset-password`, {
                 email,
                 otp, // ✅ include this
                 newPassword: password, // ✅ backend expects 'newPassword'

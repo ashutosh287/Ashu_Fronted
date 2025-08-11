@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Link, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { FaUser, FaLock, FaClipboardList, FaSignOutAlt, FaBars, FaEnvelope } from 'react-icons/fa';
-import { MdDelete } from "react-icons/md";
+import { MdApi, MdDelete } from "react-icons/md";
 import { showSuccessToast } from '../ToastifyNotification/Notification'
 
 import MyOrders from '../Fronted/Orders/UserOrders';
 import Profile from '../UserDashboard/UserProfile';
 import ChangePassword from '../UserRegisteration/ChangePassword';
-import ChangeEmail from '../UserRegisteration/ChangeEmail';
 import DeleteAccount from '../UserRegisteration/DeleteAccount';
 import axios from 'axios';
+const api = import.meta.env.VITE_BASE_URL;
+
 
 const UserDashboard = () => {
   const navigate = useNavigate();
@@ -55,13 +56,7 @@ const UserDashboard = () => {
           >
             <FaLock /> Change Password
           </Link>
-          <Link
-            to="/user-dashboard/ChangeEmail"
-            onClick={() => window.innerWidth < 640 && setSidebarOpen(false)}
-            className={`flex items-center gap-3 hover:text-purple-600 ${isActive('/user-dashboard/ChangeEmail') ? 'text-purple-700 font-semibold' : 'text-gray-700'}`}
-          >
-            <FaEnvelope /> Change Email
-          </Link>
+          
           <Link
             to="/user-dashboard/DeleteAccount"
             onClick={() => window.innerWidth < 640 && setSidebarOpen(false)}
@@ -98,7 +93,6 @@ const UserDashboard = () => {
             <Route path="Profile" element={<Profile />} />
             <Route path="change-password" element={<ChangePassword />} />
             <Route path="MyOrders" element={<MyOrders />} />
-            <Route path="ChangeEmail" element={<ChangeEmail />} />
             <Route path="DeleteAccount" element={<DeleteAccount />} />
           </Routes>
         </div>
@@ -119,7 +113,7 @@ const UserDashboard = () => {
               <button
                 onClick={async () => {
                   try {
-                    await axios.post("/api/user/logout", {}, { withCredentials: true }); // ✅ clear cookie on backend
+                    await axios.post(`${api}/User/logout`, {}, { withCredentials: true }); // ✅ clear cookie on backend
 
                     localStorage.removeItem("userId");
                     localStorage.removeItem("email");
@@ -129,7 +123,7 @@ const UserDashboard = () => {
                     navigate("/"); // ✅ go to login page
                   } catch (error) {
                     console.error("Logout failed:", error);
-                    showSuccessToast("Logout failed ❌");
+                    showSuccessToast("Logout failed");
                   } finally {
                     setShowLogoutModal(false); // hide modal
                   }

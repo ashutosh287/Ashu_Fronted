@@ -5,6 +5,8 @@ import { useFormik } from "formik";
 import { AddShopSchema } from "./AddShopValidation";
 import { showSuccessToast, showErrorToast } from "../ToastifyNotification/Notification";
 import imageCompression from "browser-image-compression"; // ✅ Compression lib added
+const api = import.meta.env.VITE_BASE_URL;
+
 
 const AddShop = () => {
   const navigate = useNavigate();
@@ -42,7 +44,7 @@ const AddShop = () => {
           shopkeeperImage: shopkeeperImageUrl,
         };
 
-        await axios.post("/api/api/add-shop", finalData);
+        await axios.post(`${api}/api/add-shop`, finalData);
         showSuccessToast("Shop registered successfully!");
         navigate("/thanks");
       } catch (error) {

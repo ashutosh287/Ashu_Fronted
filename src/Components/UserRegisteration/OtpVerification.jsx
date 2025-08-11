@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { showErrorToast, showSuccessToast } from '../ToastifyNotification/Notification';
+const api = import.meta.env.VITE_BASE_URL;
+
 
 const OTPVerification = () => {
   const navigate = useNavigate();
@@ -13,7 +15,6 @@ const OTPVerification = () => {
   const [timeLeft, setTimeLeft] = useState(30);
   const [canResend, setCanResend] = useState(false);
 
-  const API_BASE = "/api"; // Replace with your live base if needed
 
   // Countdown timer for resend
   useEffect(() => {
@@ -56,7 +57,7 @@ const OTPVerification = () => {
       setCanResend(false);
       setTimeLeft(30);
 
-      await axios.post(`${API_BASE}/forgot-password/resend-otp`, { email });
+      await axios.post(`${api}/User/forgot-password/resend-otp`, { email });
       showSuccessToast("New OTP has been sent to your email.");
 
       const timer = setInterval(() => {
@@ -80,7 +81,7 @@ const OTPVerification = () => {
       setIsLoading(true);
       const userOtp = code.join("");
 
-      const response = await axios.post(`${API_BASE}/User/verifyOtp/${id}`, {
+      const response = await axios.post(`${api}/User/verifyOtp/${id}`, {
         otp: userOtp,
       });
 

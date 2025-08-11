@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import { showSuccessToast, showErrorToast } from "../ToastifyNotification/Notification";
+const api = import.meta.env.VITE_BASE_URL;
+
 
 const SellerLogin = () => {
   const navigate = useNavigate();
@@ -22,7 +24,7 @@ const SellerLogin = () => {
 
     try {
       const res = await axios.post(
-        "/api/api/login", // ✅ correct API path
+        `${api}/api/login`, // ✅ correct API path
         form,
         {
           withCredentials: true, // ✅ allow cookies to be sent/received

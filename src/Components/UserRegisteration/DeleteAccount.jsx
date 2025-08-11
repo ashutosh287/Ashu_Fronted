@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+const api = import.meta.env.VITE_BASE_URL;
+
 
 const DeleteAccount = () => {
   const navigate = useNavigate();
@@ -15,7 +17,7 @@ const DeleteAccount = () => {
     try {
       // Step 1: Delete account
       const response = await axios.patch(
-        "/api/delete-account",
+        `${api}/User/delete-account`,
         {},
         {
           withCredentials: true, // 🟢 Send cookies
@@ -23,7 +25,7 @@ const DeleteAccount = () => {
       );
 
       // Step 2: Logout (remove token cookie)
-      await axios.post("/api/user/logout", {}, { withCredentials: true });
+      await axios.post(`${api}/user/logout`, {}, { withCredentials: true });
 
       // Step 3: Clear any localStorage (if used)
       localStorage.clear();

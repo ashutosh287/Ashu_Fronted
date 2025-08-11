@@ -5,6 +5,7 @@ import { FaOpencart, FaStore } from 'react-icons/fa';
 import { showSuccessToast, showErrorToast } from "../ToastifyNotification/Notification";
 import Search from './SearchBar';
 import '../../index.css';
+const api = import.meta.env.VITE_BASE_URL;
 
 const ShopPage = () => {
   const { id } = useParams();
@@ -22,7 +23,7 @@ const ShopPage = () => {
     const fetchShopAndProducts = async () => {
       try {
         setLoading(true);
-        const shopRes = await axios.get('/api/public-shops');
+        const shopRes = await axios.get(`${api}/public-shops`);
         const foundShop = shopRes.data.find((s) => s._id === id);
         setShop(foundShop);
 
@@ -32,7 +33,7 @@ const ShopPage = () => {
             return;
           }
 
-          const productRes = await axios.get(`/api/shop-products/${id}`);
+          const productRes = await axios.get(`${api}/shop-products/${id}`);
           setProducts(productRes.data);
         } else {
           setError('Shop not found');
@@ -51,7 +52,7 @@ const ShopPage = () => {
   const handleAddToCart = async (product) => {
     try {
       await axios.post(
-        '/api/cart',
+        `${api}/cart`,
         {
           productId: product._id,
           shopId: shop._id,

@@ -3,6 +3,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import * as Yup from 'yup';
 import { showErrorToast } from '../ToastifyNotification/Notification';
+const api = import.meta.env.VITE_BASE_URL;
+
 
 // ✅ Email validation schema using Yup
 const emailSchema = Yup.object().shape({
@@ -24,7 +26,7 @@ const ChangeEmail = () => {
       await emailSchema.validate({ newEmail });
 
       const res = await axios.patch(
-        '/api/change-email',
+        `${api}/User/change-email`,
         { newEmail },
         { withCredentials: true } // ✅ use cookies, not headers
       );

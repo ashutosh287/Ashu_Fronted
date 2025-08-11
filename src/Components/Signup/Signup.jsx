@@ -3,6 +3,8 @@ import { useFormik } from "formik";
 import axios from "axios";
 import { SellerSignupSchema } from "./SellerValidation";
 import { useState } from "react";
+const api = import.meta.env.VITE_BASE_URL;
+
 
 const SellerSignup = () => {
   const navigate = useNavigate();
@@ -20,7 +22,7 @@ const SellerSignup = () => {
     onSubmit: async (values) => {
       setIsSubmitting(true);
       try {
-        const res = await axios.post("/api/api/signup", values);
+        const res = await axios.post(`${api}/api/signup`, values);
         localStorage.setItem("sellerToken", res.data.token);
         alert("Seller account created!");
         navigate("/seller/portal/login");

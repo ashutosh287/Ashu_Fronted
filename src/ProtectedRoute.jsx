@@ -5,11 +5,13 @@ import axios from "axios";
 const ProtectedRoute = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);
   const [checking, setChecking] = useState(true); // ✅ To avoid flicker redirect
+  const api = import.meta.env.VITE_BASE_URL;
+
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get("/api/check-auth", {
+        const res = await axios.get(`${api}/User/check-auth`, {
           withCredentials: true, // ✅ Required to send cookies
         });
 

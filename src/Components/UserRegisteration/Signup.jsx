@@ -8,13 +8,14 @@ import { useFormik } from "formik";
 import { SignUpSchema } from './SignUpValidation';
 import axios from 'axios';
 import { showErrorToast, showSuccessToast } from '../ToastifyNotification/Notification';
+const api = import.meta.env.VITE_BASE_URL;
+
 
 export default function Signup() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [isShowPassword, setIsShowPassword] = useState(false);
 
-  const API_BASE = "/api";
 
   const formik = useFormik({
     initialValues: { name: "", email: "", password: "" },
@@ -23,7 +24,7 @@ export default function Signup() {
       try {
         setIsLoading(true);
 
-        const response = await axios.post(`${API_BASE}/User/createUser`, values, {
+        const response = await axios.post(`${api}/User/createUser`, values, {
           headers: { 'Content-Type': 'application/json' }
         });
 
@@ -37,7 +38,7 @@ export default function Signup() {
         const userStatus = responseData.data || {};
 
         if (userStatus.isVerify === true) {
-          showSuccessToast(' Account already exists. Please log in.');
+          showSuccessToast('Account already exists. Please log in.');
           navigate('/login');
         } else {
           showErrorToast(responseData.msg || "❌ An error occurred");

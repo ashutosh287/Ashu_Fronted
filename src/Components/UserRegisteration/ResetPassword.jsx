@@ -5,6 +5,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+const api = import.meta.env.VITE_BASE_URL;
+
 
 const ResetPassword = () => {
   const navigate = useNavigate();
@@ -22,7 +24,7 @@ const ResetPassword = () => {
 
   const handleSubmit = async (values, { setSubmitting, setStatus }) => {
     try {
-      const res = await axios.post(`http://localhost:5005/reset-password/${userId}`, values);
+      const res = await axios.post(`${api}/User/reset-password/${userId}`, values);
       if (res.data.status) {
         localStorage.removeItem("resetUserId");
         navigate("/login"); // Or your desired login path

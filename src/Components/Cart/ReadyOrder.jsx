@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+const api = import.meta.env.VITE_BASE_URL;
+
 
 const PlaceOrderWithType = () => {
   const { shopId } = useParams();
@@ -17,7 +19,7 @@ const PlaceOrderWithType = () => {
   // 📌 Load cart data
   useEffect(() => {
     axios
-      .get(`/api/cart/${shopId}`, { withCredentials: true })
+      .get(`${api}/cart/${shopId}`, { withCredentials: true })
       .then((res) => {
         setCartItems(res.data);
         const total = res.data.reduce(
@@ -84,7 +86,7 @@ const PlaceOrderWithType = () => {
       const deliveryTime = ispreferredPackedTime ? "immediate" : values.preferredPackedTime;
 
       const res = await axios.post(
-        "/api/Rorder",
+        `${api}/Rorder`,
         {
           shopId,
           fullName: values.fullName,

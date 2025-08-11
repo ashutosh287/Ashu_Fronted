@@ -7,6 +7,8 @@ import {
   showSuccessToast,
   showErrorToast,
 } from "../ToastifyNotification/Notification";
+const api = import.meta.env.VITE_BASE_URL;
+
 
 const ForgotPassword = () => {
   const [step, setStep] = useState(1);
@@ -18,7 +20,7 @@ const ForgotPassword = () => {
   const handleSendOtp = async (values) => {
     try {
       setLoading(true);
-      await axios.post("/api/request-password-reset", {
+      await axios.post(`${api}/User/request-password-reset`, {
         email: values.email,
       });
       setEmailForOTP(values.email);
@@ -35,7 +37,7 @@ const ForgotPassword = () => {
   const handleVerifyOtp = async (values) => {
     try {
       setLoading(true);
-      await axios.post("/api/forgot-password/verify-otp", {
+      await axios.post(`${api}/User/forgot-password/verify-otp`, {
         email: emailForOTP,
         otp: values.otp,
       });
@@ -52,7 +54,7 @@ const ForgotPassword = () => {
   const handleResetPassword = async (values) => {
     try {
       setLoading(true);
-      await axios.post("/api/forgot-password/reset-password", {
+      await axios.post(`${api}/User/forgot-password/reset-password`, {
         email: emailForOTP,
         newPassword: values.password,
       });

@@ -1,13 +1,13 @@
 // MainLayout.jsx
 import { Outlet, useLocation } from 'react-router-dom';
-import {Navbar , Footer} from './AllComponents'
+import { Navbar, Footer } from './AllComponents'
 
 
 const MainLayout = () => {
   const { pathname } = useLocation();
 
   // pages where navbar & footer should be hidden
-  const hideLayoutOn = ["/register", "/UserLogin", "/signup", "/login"];
+  const hideLayoutOn = ["/signup", "/login", "/seller/portal/signup", "/seller/portal/login"];
   const hideLayout = hideLayoutOn.includes(pathname);
 
   return (

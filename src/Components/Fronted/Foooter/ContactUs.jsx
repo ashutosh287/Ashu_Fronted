@@ -5,6 +5,8 @@ import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import axios from "axios";
 import { showSuccessToast, showErrorToast } from '../../ToastifyNotification/Notification';
 import { useNavigate } from "react-router-dom";
+const api = import.meta.env.VITE_BASE_URL;
+
 
 export default function ContactUs() {
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ export default function ContactUs() {
 
   const formik = useFormik({
     initialValues: {
-      userEmail: userEmail || "", 
+      userEmail: userEmail || "",
       fullName: "",
       email: "",
       mobile: "",
@@ -41,17 +43,13 @@ export default function ContactUs() {
         .required("Message is required"),
     }),
     onSubmit: async (values, { resetForm, setSubmitting }) => {
-      // Check if user is logged in
-      const token = localStorage.getItem("token");
-
-      if (!token) {
-        showErrorToast("Please login to send a message.");
-        setSubmitting(false);
-        return;
-      }
-
       try {
-        const response = await axios.post(`/api/ContactUs`, values);
+        // No need to manually get token — just let browser send cookies
+        const response = await axios.post(
+          `${api}/ContactUs`,
+          values,
+          { withCredentials: true } // ✅ sends cookies automatically
+        );
 
         if (response.status === 201) {
           showSuccessToast('Submitted! Stay tuned.');
@@ -61,11 +59,12 @@ export default function ContactUs() {
           showErrorToast('Something went wrong. Please try again later');
         }
       } catch (error) {
-        alert("Error submitting form: " + error.message);
+        alert("Error submitting form: " + (error.response?.data?.message || error.message));
       } finally {
         setSubmitting(false);
       }
-    },
+    }
+
   });
 
   return (
@@ -124,11 +123,10 @@ export default function ContactUs() {
                 name="fullName"
                 type="text"
                 placeholder="Enter your name"
-                className={`w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${
-                  formik.touched.fullName && formik.errors.fullName
-                    ? "border-red-500 focus:ring-red-500"
-                    : "border-gray-300 focus:ring-purple-500"
-                }`}
+                className={`w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${formik.touched.fullName && formik.errors.fullName
+                  ? "border-red-500 focus:ring-red-500"
+                  : "border-gray-300 focus:ring-purple-500"
+                  }`}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.fullName}
@@ -146,11 +144,10 @@ export default function ContactUs() {
                 name="email"
                 type="email"
                 placeholder="you@example.com"
-                className={`w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${
-                  formik.touched.email && formik.errors.email
-                    ? "border-red-500 focus:ring-red-500"
-                    : "border-gray-300 focus:ring-purple-500"
-                }`}
+                className={`w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${formik.touched.email && formik.errors.email
+                  ? "border-red-500 focus:ring-red-500"
+                  : "border-gray-300 focus:ring-purple-500"
+                  }`}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
@@ -169,11 +166,10 @@ export default function ContactUs() {
                 type="tel"
                 maxLength={10}
                 placeholder="Enter your mobile number"
-                className={`w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${
-                  formik.touched.mobile && formik.errors.mobile
-                    ? "border-red-500 focus:ring-red-500"
-                    : "border-gray-300 focus:ring-purple-500"
-                }`}
+                className={`w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${formik.touched.mobile && formik.errors.mobile
+                  ? "border-red-500 focus:ring-red-500"
+                  : "border-gray-300 focus:ring-purple-500"
+                  }`}
                 onChange={(e) => {
                   const onlyDigits = e.target.value.replace(/[^0-9]/g, "");
                   formik.setFieldValue("mobile", onlyDigits);
@@ -194,11 +190,10 @@ export default function ContactUs() {
                 name="message"
                 rows="5"
                 placeholder="How can we help you?"
-                className={`w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${
-                  formik.touched.message && formik.errors.message
-                    ? "border-red-500 focus:ring-red-500"
-                    : "border-gray-300 focus:ring-purple-500"
-                }`}
+                className={`w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${formik.touched.message && formik.errors.message
+                  ? "border-red-500 focus:ring-red-500"
+                  : "border-gray-300 focus:ring-purple-500"
+                  }`}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.message}

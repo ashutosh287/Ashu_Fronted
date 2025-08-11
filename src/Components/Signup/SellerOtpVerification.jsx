@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { showErrorToast, showSuccessToast } from "../ToastifyNotification/Notification";
 import { useNavigate } from "react-router-dom";
+const api = import.meta.env.VITE_BASE_URL;
+
 
 const SellerOTPVerification = ({ email }) => {
   const navigate = useNavigate();
@@ -44,7 +46,7 @@ const SellerOTPVerification = ({ email }) => {
 
     setIsLoading(true);
     try {
-      const res = await axios.post("/api/seller/verify-otp", {
+      const res = await axios.post(`${api}/api/seller/verify-otp`, {
         email,
         otp: enteredOtp,
       });
@@ -59,7 +61,7 @@ const SellerOTPVerification = ({ email }) => {
 
   const handleResendOtp = async () => {
     try {
-      await axios.post("/api/seller/request-otp", { email });
+      await axios.post(`${api}/api/seller/request-otp`, { email });
       showSuccessToast("OTP resent successfully");
       setTimeLeft(60);
       setCanResend(false);

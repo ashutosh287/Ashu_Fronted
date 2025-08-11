@@ -10,6 +10,8 @@ import { BsShop } from 'react-icons/bs';
 import Shop from '../../Shop/ShopCards';
 import axios from 'axios'; // ✅ import axios
 import { showInfoToast } from '../../ToastifyNotification/Notification'
+const api = import.meta.env.VITE_BASE_URL;
+
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,7 +20,7 @@ export default function Navbar() {
   useEffect(() => {
     const checkLogin = async () => {
       try {
-        const res = await axios.get("/api/check-auth", {
+        const res = await axios.get(`${api}/User/check-auth`, {
           withCredentials: true, // ✅ Important for cookies
         });
 

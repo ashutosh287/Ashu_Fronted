@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { IoIosSearch } from "react-icons/io"; // ✅ import icon
 
+const api = import.meta.env.VITE_BASE_URL;
 
 const SearchBar = ({ shopId, onProductSelect }) => {
   const [query, setQuery] = useState("");
@@ -15,7 +16,7 @@ const SearchBar = ({ shopId, onProductSelect }) => {
 
     try {
       console.log("✅ Shop ID from props:", shopId); // 👈 log this
-      const res = await axios.get(`/api/search/live-search/${shopId}?query=${value}`);
+      const res = await axios.get(`${api}/search/search/live-search/${shopId}?query=${value}`);
       console.log("✅ Live search results:", res.data); // 👈 log this
       setResults(res.data.products || []);
     } catch (err) {

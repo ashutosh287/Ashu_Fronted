@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
+const api = import.meta.env.VITE_BASE_URL;
+
+
 
 const SellerProtectedRoutes = ({ children }) => {
   const [loading, setLoading] = useState(true);
@@ -8,7 +11,7 @@ const SellerProtectedRoutes = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("/api/check-seller-token", { withCredentials: true })
+      .get(`${api}/api/check-seller-token`, { withCredentials: true })
       .then((res) => {
         setLoggedIn(res.data.loggedIn);
         setLoading(false);

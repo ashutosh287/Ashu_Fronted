@@ -8,6 +8,8 @@ import { GiPowerButton } from "react-icons/gi";
 import { showSuccessToast, showErrorToast } from '../ToastifyNotification/Notification';
 import SellerProfile from './SellerProfile';
 import Revenue from './Revenue';
+const api = import.meta.env.VITE_BASE_URL;
+
 
 
 const SellerDashboard = () => {
@@ -37,7 +39,6 @@ const SellerDashboard = () => {
 
 
   const navigate = useNavigate();
-  const token = localStorage.getItem('sellerToken');
 
   // ✅ Save activeTab whenever it changes
   useEffect(() => {
@@ -47,7 +48,7 @@ const SellerDashboard = () => {
 
   const fetchSeller = async () => {
     try {
-      const res = await axios.get("/api/api/dashboard", {
+      const res = await axios.get(`${api}/api/dashboard`, {
         withCredentials: true, // ✅ Send cookies with request
       });
 
@@ -85,7 +86,7 @@ const SellerDashboard = () => {
 
   const fetchReadyOrders = async () => {
     try {
-      const res = await axios.get(`/api/api/readyOrder/${shopId}`, {
+      const res = await axios.get(`${api}/api/readyOrder/${shopId}`, {
         withCredentials: true, // ✅ send cookies with request
       });
       setReadyOrders(res.data);
@@ -98,7 +99,7 @@ const SellerDashboard = () => {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("/api/api/products", {
+      const res = await axios.get(`${api}/api/products`, {
         withCredentials: true, // ✅ cookie send automatically
       });
       setProducts(res.data);
@@ -131,9 +132,9 @@ const SellerDashboard = () => {
       };
 
       if (editId) {
-        await axios.put(`/api/api/product/${editId}`, formData, config);
+        await axios.put(`${api}/api/product/${editId}`, formData, config);
       } else {
-        await axios.post(`/api/api/product`, formData, config);
+        await axios.post(`${api}/api/product`, formData, config);
       }
 
       // ✅ Reset form after success
@@ -183,7 +184,7 @@ const SellerDashboard = () => {
       setShopStatusLoading(true);
 
       const res = await axios.patch(
-        "/api/shops/status",
+        `${api}/api/shops/status`,
         { open: nextStatus },
         { withCredentials: true } // ✅ cookie send automatically
       );
@@ -206,7 +207,7 @@ const SellerDashboard = () => {
   const handleTogglePublish = async (id) => {
     try {
       await axios.patch(
-        `/api/api/product/${id}/toggle-publish`,
+        `${api}/api/product/${id}/toggle-publish`,
         {},
         { withCredentials: true } // ✅ Token from cookie
       );
@@ -225,13 +226,13 @@ const SellerDashboard = () => {
     setActiveTab('add');
   };
 
-  
+
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
 
     try {
-      await axios.delete(`/api/api/product/${id}`, { withCredentials: true }); // ✅ cookie-based auth
+      await axios.delete(`${api}/api/product/${id}`, { withCredentials: true }); // ✅ cookie-based auth
       fetchProducts(); // 🔄 Refresh product list
       showSuccessToast("Product deleted successfully!");
     } catch (err) {
@@ -246,7 +247,7 @@ const SellerDashboard = () => {
 
     try {
       // ✅ Backend call to clear auth cookie
-      await axios.post("/api/api/logout", {}, { withCredentials: true });
+      await axios.post(`${api}/api/logout`, {}, { withCredentials: true });
 
       // ✅ Clear local UI states
       ["sellerData", "seller-active-tab", "activeTab", "darkMode"].forEach(key =>
@@ -263,18 +264,16 @@ const SellerDashboard = () => {
 
   const handleToggleStock = async (productId, inStockValue) => {
     try {
-      // Optional: Show a loading state or disable button here
+      // Send request with cookies
       await axios.put(
-        `/api/api/product/stock/${productId}`,
+        `${api}/api/product/stock/${productId}`,
         { inStock: inStockValue },
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          withCredentials: true, // ✅ Important for cookies
         }
       );
 
-      // ✅ Update product list instantly (no full refetch needed)
+      // ✅ Update product list instantly
       setProducts(prevProducts =>
         prevProducts.map(p =>
           p._id === productId ? { ...p, inStock: inStockValue } : p
@@ -282,13 +281,16 @@ const SellerDashboard = () => {
       );
 
       showSuccessToast(
-        inStockValue ? "Product marked as In Stock" : "Product marked as Out of Stock"
+        inStockValue
+          ? "Product marked as In Stock"
+          : "Product marked as Out of Stock"
       );
     } catch (err) {
       console.error("❌ Failed to update stock", err);
       showErrorToast("Could not update stock status. Please try again.");
     }
   };
+
 
 
 
@@ -793,17 +795,23 @@ const SellerDashboard = () => {
                                 onChange={async (e) => {
                                   const newStatus = e.target.value;
                                   try {
-                                    await axios.put(`/api/api/readyOrder/${order._id}`, {
-                                      status: newStatus,
-                                      context: 'ready',
-                                    }, {
-                                      headers: { Authorization: `Bearer ${token}` }
-                                    });
+                                    await axios.put(
+                                      `${api}/api/readyOrder/${order._id}`,
+                                      {
+                                        status: newStatus,
+                                        context: 'ready',
+                                      },
+                                      {
+                                        withCredentials: true, // ✅ Send cookies
+                                      }
+                                    );
+
                                     fetchReadyOrders();
                                   } catch (err) {
                                     console.error("❌ Failed to update status:", err);
                                     alert("Status update failed.");
                                   }
+
                                 }}
                                 className="p-2 border rounded bg-white text-black"
                               >
