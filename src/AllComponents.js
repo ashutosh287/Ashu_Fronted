@@ -2,16 +2,13 @@
 export { default as Signup } from './Components/Signup/Signup';
 export { default as Login } from './Components/Login/Login';
 export { default as Dashboard } from './Components/Dashboard/Dashboard';
-export { default as ProductList } from './Components/UserView/ProductList';
 
 export { default as ShopCards } from './Components/Shop/ShopCards';
 export { default as ShopPage } from './Components/Shop/ShopPage';
 export { default as AddShop } from './Components/Shop/AddShop';
-export { default as SellerShopView } from './Components/Shop/SellerViewshop'
 
 
 export { default as Cart } from './Components/Cart/Cart'
-export { default as PlaceOrder } from './Components/Cart/PlaceOrder'
 export { default as ReadyOrder } from './Components/Cart/ReadyOrder'
 export { default as UserSignup } from './Components/UserRegisteration/Signup'
 export { default as OtpVerification } from './Components/UserRegisteration/OtpVerification'

@@ -12,7 +12,6 @@ import {
   AddShop,
   SellerShopView,
   Cart,
-  PlaceOrder,
   ReadyOrder,
   UserSignup,
   OtpVerification,
@@ -58,7 +57,6 @@ export default function App() {
         <Route path="/shop" element={<ShopCards />} />
         <Route path="/shop/:id" element={<ShopPage />} />
         <Route path="/cart/:shopId" element={<Cart />} />
-        <Route path="/order/:shopId" element={<PlaceOrder />} />
         <Route path="/readyOrder/:shopId" element={<ReadyOrder />} />
 
 

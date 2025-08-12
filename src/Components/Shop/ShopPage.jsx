@@ -23,7 +23,7 @@ const ShopPage = () => {
     const fetchShopAndProducts = async () => {
       try {
         setLoading(true);
-        const shopRes = await axios.get(`${api}/public-shops`);
+        const shopRes = await axios.get(`${api}api/public-shops`);
         const foundShop = shopRes.data.find((s) => s._id === id);
         setShop(foundShop);
 

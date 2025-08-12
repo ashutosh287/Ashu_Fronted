@@ -171,7 +171,7 @@ const ShopCards = () => {
     const fetchShops = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`${api}/public-shops`);
+        const res = await axios.get(`${api}api/public-shops`);
 
         // ✅ API response safe handle
         if (Array.isArray(res.data)) {
