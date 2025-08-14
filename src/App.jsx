@@ -10,7 +10,6 @@ import {
   ShopCards,
   ShopPage,
   AddShop,
-  SellerShopView,
   Cart,
   ReadyOrder,
   UserSignup,
@@ -94,7 +93,6 @@ export default function App() {
         <Route path="/sell/manage" element={<SellerProtectedRoutes><Dashboard /></SellerProtectedRoutes>} />
         <Route path="/add-shop" element={<AddShop />} />
         <Route path="/thanks" element={<ThanksReg />} />
-        <Route path="/my-shop" element={<SellerProtectedRoutes><SellerShopView /></SellerProtectedRoutes>} />
 
         {/* ❌ Not found fallback */}
         <Route path="*" element={<div className="p-10 text-center text-red-500 font-bold text-xl">404 | Page Not Found</div>} />
