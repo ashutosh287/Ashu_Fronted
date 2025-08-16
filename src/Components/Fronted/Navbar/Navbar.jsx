@@ -20,7 +20,7 @@ export default function Navbar() {
   useEffect(() => {
     const checkLogin = async () => {
       try {
-        const res = await axios.get(`${api}/User/check-auth`, {
+        const res = await axios.get(`${api}/api/user/check-auth`, {
           withCredentials: true, // ✅ Important for cookies
         });
 
