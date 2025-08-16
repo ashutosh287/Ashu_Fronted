@@ -25,7 +25,7 @@ const ShopCards = () => {
 
         // ✅ API response safe handle
         if (Array.isArray(res.data)) {
-          setShops(res.data);
+          setShops(res.data); 
         } else if (Array.isArray(res.data.shops)) {
           setShops(res.data.shops);
         } else {
@@ -80,52 +80,38 @@ const ShopCards = () => {
                        text-[11px] sm:text-sm lg:text-base"
               >
                 {/* Shop Image */}
-                {shop?.shopImage ? (
-                  <button
+                {shop.shopImage ? (
+                  <img
+                    src={shop.shopImage}
+                    alt={shop.shopName}
                     onClick={() => setZoomedImage(shop.shopImage)}
-                    className="focus:outline-none"
-                  >
-                    <img
-                      src={shop.shopImage}
-                      alt={shop.shopName}
-                      className="w-10 h-10 rounded-full border-2 border-white object-cover cursor-pointer transition-transform hover:scale-105"
-                    />
-                  </button>
+                    className="h-[100px] sm:h-28 md:h-32 lg:h-36 w-full object-cover cursor-pointer transition-transform hover:scale-105"
+                  />
                 ) : (
-                  <div className="w-10 h-10 rounded-full border-2 border-white bg-gray-200 flex items-center justify-center text-gray-500 text-xl">
+                  <div className="h-20 sm:h-28 md:h-32 lg:h-36 w-full bg-gray-200 flex items-center justify-center text-gray-500 text-3xl sm:text-5xl">
                     <FaStore />
                   </div>
                 )}
 
-                {/* Zoom Modal */}
                 {zoomedImage && (
-                  <div
-                    className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
-                    onClick={() => setZoomedImage(null)} // backdrop click close
-                  >
-                    <div
-                      className="relative"
-                      onClick={(e) => e.stopPropagation()} // image click se close na ho
+                  <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+                    {/* Close Button */}
+                    <button
+                      onClick={() => setZoomedImage(null)}
+                      className="absolute top-4 right-4 text-white text-3xl font-bold hover:text-red-400 transition"
+                      aria-label="Close"
                     >
-                      {/* Close Button */}
-                      <button
-                        onClick={() => setZoomedImage(null)}
-                        className="absolute -top-4 -right-4 bg-white rounded-full shadow-lg text-black text-2xl w-10 h-10 flex items-center justify-center hover:bg-red-500 hover:text-white transition"
-                        aria-label="Close"
-                      >
-                        &times;
-                      </button>
+                      &times;
+                    </button>
 
-                      {/* Zoomed Image */}
-                      <img
-                        src={zoomedImage}
-                        alt="Zoomed shop"
-                        className="max-w-[90vw] max-h-[90vh] rounded-xl shadow-lg border-4 border-white object-contain"
-                      />
-                    </div>
+                    {/* Zoomed Image */}
+                    <img
+                      src={zoomedImage}
+                      alt="Zoomed shop"
+                      className="max-w-[90%] max-h-[90%] rounded-xl shadow-lg border-4 border-white"
+                    />
                   </div>
                 )}
-
 
                 {/* Shop Details */}
                 <div className="p-2 sm:p-4 lg:p-5 flex-grow flex flex-col">
