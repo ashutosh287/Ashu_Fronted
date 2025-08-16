@@ -24,7 +24,7 @@ const SellerLogin = () => {
 
     try {
       const res = await axios.post(
-        `${api}/api/login`, // ✅ correct API path
+        `${api}/api/seller/login`, // ✅ correct API path
         form,
         {
           withCredentials: true, // ✅ allow cookies to be sent/received
