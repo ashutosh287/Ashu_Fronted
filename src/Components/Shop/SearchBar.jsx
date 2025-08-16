@@ -16,7 +16,7 @@ const SearchBar = ({ shopId, onProductSelect }) => {
 
     try {
       console.log("✅ Shop ID from props:", shopId); // 👈 log this
-      const res = await axios.get(`${api}/search/search/live-search/${shopId}?query=${value}`);
+      const res = await axios.get(`${api}/api/search/search/search/live-search/${shopId}?query=${value}`);
       console.log("✅ Live search results:", res.data); // 👈 log this
       setResults(res.data.products || []);
     } catch (err) {

@@ -28,7 +28,7 @@ const Revenue = () => {
   useEffect(() => {
     const fetchRevenue = async () => {
       try {
-        const res = await axios.get(`${api}/api/revenue`, {
+        const res = await axios.get(`${api}/api/seller/revenue`, {
           withCredentials: true, // ✅ send cookies automatically
         });
 

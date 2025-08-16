@@ -46,7 +46,7 @@ export default function ContactUs() {
       try {
         // No need to manually get token — just let browser send cookies
         const response = await axios.post(
-          `${api}/ContactUs`,
+          `${api}/api/ContactUs`,
           values,
           { withCredentials: true } // ✅ sends cookies automatically
         );

@@ -24,7 +24,7 @@ const ResetPassword = () => {
 
   const handleSubmit = async (values, { setSubmitting, setStatus }) => {
     try {
-      const res = await axios.post(`${api}/User/reset-password/${userId}`, values);
+      const res = await axios.post(`${api}/api/user/reset-password/${userId}`, values);
       if (res.data.status) {
         localStorage.removeItem("resetUserId");
         navigate("/login"); // Or your desired login path

@@ -57,7 +57,7 @@ const OTPVerification = () => {
       setCanResend(false);
       setTimeLeft(30);
 
-      await axios.post(`${api}/User/forgot-password/resend-otp`, { email });
+      await axios.post(`${api}/api/user/forgot-password/resend-otp`, { email });
       showSuccessToast("New OTP has been sent to your email.");
 
       const timer = setInterval(() => {
@@ -81,7 +81,7 @@ const OTPVerification = () => {
       setIsLoading(true);
       const userOtp = code.join("");
 
-      const response = await axios.post(`${api}/User/verifyOtp/${id}`, {
+      const response = await axios.post(`${api}/api/user/verifyOtp/${id}`, {
         otp: userOtp,
       });
 

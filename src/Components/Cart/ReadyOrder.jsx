@@ -19,7 +19,7 @@ const PlaceOrderWithType = () => {
   // 📌 Load cart data
   useEffect(() => {
     axios
-      .get(`${api}/cart/${shopId}`, { withCredentials: true })
+      .get(`${api}/api/cart/${shopId}`, { withCredentials: true })
       .then((res) => {
         setCartItems(res.data);
         const total = res.data.reduce(
@@ -86,7 +86,7 @@ const PlaceOrderWithType = () => {
       const deliveryTime = ispreferredPackedTime ? "immediate" : values.preferredPackedTime;
 
       const res = await axios.post(
-        `${api}/Rorder`,
+        `${api}/api/Rorder`,
         {
           shopId,
           fullName: values.fullName,

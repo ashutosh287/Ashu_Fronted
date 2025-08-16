@@ -20,7 +20,7 @@ const ForgotPassword = () => {
   const handleSendOtp = async (values) => {
     try {
       setLoading(true);
-      await axios.post(`${api}/User/request-password-reset`, {
+      await axios.post(`${api}/api/user/request-password-reset`, {
         email: values.email,
       });
       setEmailForOTP(values.email);
@@ -37,7 +37,7 @@ const ForgotPassword = () => {
   const handleVerifyOtp = async (values) => {
     try {
       setLoading(true);
-      await axios.post(`${api}/User/forgot-password/verify-otp`, {
+      await axios.post(`${api}/api/user/forgot-password/verify-otp`, {
         email: emailForOTP,
         otp: values.otp,
       });
@@ -54,7 +54,7 @@ const ForgotPassword = () => {
   const handleResetPassword = async (values) => {
     try {
       setLoading(true);
-      await axios.post(`${api}/User/forgot-password/reset-password`, {
+      await axios.post(`${api}/api/user/forgot-password/reset-password`, {
         email: emailForOTP,
         newPassword: values.password,
       });
@@ -123,11 +123,10 @@ const EmailStep = ({ onSubmit, loading }) => {
       <button
         type="submit"
         disabled={loading}
-        className={`w-full py-2 rounded-lg font-medium transition ${
-          loading
+        className={`w-full py-2 rounded-lg font-medium transition ${loading
             ? "bg-purple-400 text-white cursor-not-allowed"
             : "bg-purple-600 hover:bg-purple-700 text-white"
-        }`}
+          }`}
       >
         {loading ? "Sending..." : "Send OTP"}
       </button>
@@ -166,11 +165,10 @@ const OtpStep = ({ onSubmit, loading }) => {
       <button
         type="submit"
         disabled={loading}
-        className={`w-full py-2 rounded-lg font-medium transition ${
-          loading
+        className={`w-full py-2 rounded-lg font-medium transition ${loading
             ? "bg-purple-400 text-white cursor-not-allowed"
             : "bg-purple-600 hover:bg-purple-700 text-white"
-        }`}
+          }`}
       >
         {loading ? "Verifying..." : "Verify OTP"}
       </button>
@@ -215,11 +213,10 @@ const PasswordStep = ({ onSubmit, loading }) => {
       <button
         type="submit"
         disabled={loading}
-        className={`w-full py-2 rounded-lg font-medium transition ${
-          loading
+        className={`w-full py-2 rounded-lg font-medium transition ${loading
             ? "bg-purple-400 text-white cursor-not-allowed"
             : "bg-purple-600 hover:bg-purple-700 text-white"
-        }`}
+          }`}
       >
         {loading ? "Resetting..." : "Reset Password"}
       </button>

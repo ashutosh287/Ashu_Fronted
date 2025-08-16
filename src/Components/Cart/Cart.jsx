@@ -22,10 +22,10 @@ const Cart = () => {
     const checkAuthAndFetch = async () => {
       try {
         // 🔐 Check if user is authenticated
-        await axios.get(`${api}/User/check-auth`, { withCredentials: true });
+        await axios.get(`${api}/api/user/check-auth`, { withCredentials: true });
 
         // ✅ Fetch cart after auth passes
-        const res = await axios.get(`${api}/cart/${shopId}`, {
+        const res = await axios.get(`${api}/api/cart/${shopId}`, {
           withCredentials: true,
         });
         setCartItems(res.data);
@@ -55,10 +55,10 @@ const Cart = () => {
 
   const increaseQty = async (itemId) => {
     try {
-      await axios.put(`${api}/cart/increase/${itemId}`, {}, {
+      await axios.put(`${api}/api/cart/increase/${itemId}`, {}, {
         withCredentials: true,
       });
-      const res = await axios.get(`${api}/cart/${shopId}`, {
+      const res = await axios.get(`${api}/api/cart/${shopId}`, {
         withCredentials: true,
       });
       setCartItems(res.data);
@@ -70,14 +70,14 @@ const Cart = () => {
   const decreaseQty = async (itemId, removeDirectly = false) => {
     try {
       const url = removeDirectly
-        ? `${api}/cart/decrease/${itemId}?removeDirectly=true`
-        : `${api}/cart/decrease/${itemId}`;
+        ? `${api}/api/cart/decrease/${itemId}?removeDirectly=true`
+        : `${api}/api/cart/decrease/${itemId}`;
 
       await axios.put(url, {}, {
         withCredentials: true,
       });
 
-      const res = await axios.get(`${api}/cart/${shopId}`, {
+      const res = await axios.get(`${api}/api/cart/${shopId}`, {
         withCredentials: true,
       });
       setCartItems(res.data);

@@ -26,7 +26,7 @@ const ChangeEmail = () => {
       await emailSchema.validate({ newEmail });
 
       const res = await axios.patch(
-        `${api}/User/change-email`,
+        `${api}/api/user/change-email`,
         { newEmail },
         { withCredentials: true } // ✅ use cookies, not headers
       );

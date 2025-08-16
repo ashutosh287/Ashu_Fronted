@@ -17,7 +17,7 @@ const DeleteAccount = () => {
     try {
       // Step 1: Delete account
       const response = await axios.patch(
-        `${api}/User/delete-account`,
+        `${api}/api/user/delete-account`,
         {},
         {
           withCredentials: true, // 🟢 Send cookies
@@ -25,7 +25,7 @@ const DeleteAccount = () => {
       );
 
       // Step 2: Logout (remove token cookie)
-      await axios.post(`${api}/user/logout`, {}, { withCredentials: true });
+      await axios.post(`${api}/api/user/logout`, {}, { withCredentials: true });
 
       // Step 3: Clear any localStorage (if used)
       localStorage.clear();

@@ -33,7 +33,7 @@ const ShopPage = () => {
             return;
           }
 
-          const productRes = await axios.get(`${api}/shop-products/${id}`);
+          const productRes = await axios.get(`${api}/api/shop-products/${id}`);
           setProducts(productRes.data);
         } else {
           setError('Shop not found');
@@ -52,7 +52,7 @@ const ShopPage = () => {
   const handleAddToCart = async (product) => {
     try {
       await axios.post(
-        `${api}/cart`,
+        `${api}/api/cart`,
         {
           productId: product._id,
           shopId: shop._id,
@@ -153,7 +153,7 @@ const ShopPage = () => {
             <Search shopId={id} onProductSelect={scrollToProduct} />
           </div>
 
-          <Link to={`/cart/${shop._id}`} className="ml-auto hidden sm:block">
+          <Link to={`/api/cart/${shop._id}`} className="ml-auto hidden sm:block">
             <FaOpencart className="text-3xl hover:text-purple-200 transition duration-200" />
           </Link>
         </div>

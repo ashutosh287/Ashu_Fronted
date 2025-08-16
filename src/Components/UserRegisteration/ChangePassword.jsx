@@ -27,7 +27,7 @@ const ChangePassword = () => {
   const handleSubmit = async (values, { resetForm, setSubmitting, setStatus }) => {
     try {
       const res = await axios.post(
-        `${api}/User/change-password`,
+        `${api}/api/user/change-password`,
         {
           currentPassword: values.currentPassword,
           newPassword: values.newPassword,

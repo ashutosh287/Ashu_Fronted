@@ -26,7 +26,7 @@ const ShopSearch = () => {
   const fetchShops = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`${api}/search/search/shops?search=${searchTerm}`);
+      const res = await axios.get(`${api}/api/search/search/shops?search=${searchTerm}`);
       setShops(res?.data?.shops || []);
     } catch (error) {
       console.error("Search error", error);

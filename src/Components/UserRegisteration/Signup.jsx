@@ -24,7 +24,7 @@ export default function Signup() {
       try {
         setIsLoading(true);
 
-        const response = await axios.post(`${api}/User/createUser`, values, {
+        const response = await axios.post(`${api}/api/user/createUser`, values, {
           headers: { 'Content-Type': 'application/json' }
         });
 

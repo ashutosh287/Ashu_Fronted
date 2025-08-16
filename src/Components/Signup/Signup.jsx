@@ -22,7 +22,7 @@ const SellerSignup = () => {
     onSubmit: async (values) => {
       setIsSubmitting(true);
       try {
-        const res = await axios.post(`${api}/api/signup`, values);
+        const res = await axios.post(`${api}/api/seller/signup`, values);
         localStorage.setItem("sellerToken", res.data.token);
         alert("Seller account created!");
         navigate("/seller/portal/login");
