@@ -1,7 +1,3 @@
-
-
-
-
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -23,15 +19,13 @@ const ShopCards = () => {
         setLoading(true);
         const res = await axios.get(`${api}/api/public-shops`);
 
-        // ✅ API response safe handle
         if (Array.isArray(res.data)) {
-          setShops(res.data); 
+          setShops(res.data);
         } else if (Array.isArray(res.data.shops)) {
           setShops(res.data.shops);
         } else {
           setShops([]);
         }
-
       } catch (err) {
         console.error("Error fetching shops:", err);
         setError("Failed to load shops. Please try again later.");
@@ -42,7 +36,6 @@ const ShopCards = () => {
 
     fetchShops();
 
-    // Get name from localStorage
     const storedName = localStorage.getItem("name");
     if (storedName) setName(storedName);
   }, []);
@@ -76,8 +69,7 @@ const ShopCards = () => {
             {shops.map((shop) => (
               <div
                 key={shop._id}
-                className="bg-white rounded-xl shadow-md hover:shadow-xl transform hover:-translate-y-1.5 transition-all duration-300 overflow-hidden flex flex-col
-                       text-[11px] sm:text-sm lg:text-base"
+                className="bg-white rounded-xl shadow-md hover:shadow-xl transform hover:-translate-y-1.5 transition-all duration-300 overflow-hidden flex flex-col text-[11px] sm:text-sm lg:text-base"
               >
                 {/* Shop Image */}
                 {shop.shopImage ? (
@@ -93,23 +85,39 @@ const ShopCards = () => {
                   </div>
                 )}
 
+                {/* ✅ Zoomed Modal */}
                 {zoomedImage && (
-                  <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-                    {/* Close Button */}
-                    <button
-                      onClick={() => setZoomedImage(null)}
-                      className="absolute top-4 right-4 text-white text-3xl font-bold hover:text-red-400 transition"
-                      aria-label="Close"
+                  <div
+                    className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 px-4"
+                    onClick={() => setZoomedImage(null)} // backdrop click
+                  >
+                    <div
+                      className="bg-white p-4 sm:p-6 rounded-xl shadow-xl relative max-w-md w-full"
+                      onClick={(e) => e.stopPropagation()} // stop modal close on image click
                     >
-                      &times;
-                    </button>
+                      {/* Close Button */}
+                      <button
+                        onClick={() => setZoomedImage(null)}
+                        className="absolute top-2 right-3 text-3xl text-gray-400 hover:text-red-500 transition"
+                      >
+                        &times;
+                      </button>
 
-                    {/* Zoomed Image */}
-                    <img
-                      src={zoomedImage}
-                      alt="Zoomed shop"
-                      className="max-w-[90%] max-h-[90%] rounded-xl shadow-lg border-4 border-white"
-                    />
+                      {/* Zoomed Image */}
+                      <img
+                        src={zoomedImage}
+                        alt="Zoomed shop"
+                        className="w-full h-auto max-h-[70vh] rounded-lg object-contain mb-4"
+                      />
+
+                      {/* Back Button */}
+                      <button
+                        onClick={() => setZoomedImage(null)}
+                        className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg transition font-semibold"
+                      >
+                        Back
+                      </button>
+                    </div>
                   </div>
                 )}
 
