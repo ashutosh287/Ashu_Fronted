@@ -11,7 +11,7 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get(`${api}/api/usercheck-auth`, {
+        const res = await axios.get(`${api}/api/user/check-auth`, {
           withCredentials: true, // ✅ Required to send cookies
         });
 
