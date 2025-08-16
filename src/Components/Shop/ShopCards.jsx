@@ -25,7 +25,7 @@ const ShopCards = () => {
 
         // ✅ API response safe handle
         if (Array.isArray(res.data)) {
-          setShops(res.data); 
+          setShops(res.data);
         } else if (Array.isArray(res.data.shops)) {
           setShops(res.data.shops);
         } else {
@@ -94,24 +94,31 @@ const ShopCards = () => {
                 )}
 
                 {zoomedImage && (
-                  <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-                    {/* Close Button */}
-                    <button
-                      onClick={() => setZoomedImage(null)}
-                      className="absolute top-4 right-4 text-white text-3xl font-bold hover:text-red-400 transition"
-                      aria-label="Close"
-                    >
-                      &times;
-                    </button>
+                  <div
+                    className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+                    onClick={() => setZoomedImage(null)} // overlay click = close
+                  >
+                    {/* Stop propagation for image */}
+                    <div onClick={(e) => e.stopPropagation()}>
+                      {/* Close Button */}
+                      <button
+                        onClick={() => setZoomedImage(null)}
+                        className="absolute top-4 right-4 text-white text-3xl font-bold hover:text-red-400 transition"
+                        aria-label="Close"
+                      >
+                        &times;
+                      </button>
 
-                    {/* Zoomed Image */}
-                    <img
-                      src={zoomedImage}
-                      alt="Zoomed shop"
-                      className="max-w-[90%] max-h-[90%] rounded-xl shadow-lg border-4 border-white"
-                    />
+                      {/* Zoomed Image */}
+                      <img
+                        src={zoomedImage}
+                        alt="Zoomed shop"
+                        className="max-w-[90%] max-h-[90%] rounded-xl shadow-lg border-4 border-white"
+                      />
+                    </div>
                   </div>
                 )}
+
 
                 {/* Shop Details */}
                 <div className="p-2 sm:p-4 lg:p-5 flex-grow flex flex-col">
