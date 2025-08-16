@@ -80,28 +80,32 @@ const ShopCards = () => {
                        text-[11px] sm:text-sm lg:text-base"
               >
                 {/* Shop Image */}
-                {shop.shopImage ? (
-                  <img
-                    src={shop.shopImage}
-                    alt={shop.shopName}
+                {shop?.shopImage ? (
+                  <button
                     onClick={() => setZoomedImage(shop.shopImage)}
-                    className="h-[100px] sm:h-28 md:h-32 lg:h-36 w-full object-cover cursor-pointer transition-transform hover:scale-105"
-                  />
+                    className="focus:outline-none"
+                  >
+                    <img
+                      src={shop.shopImage}
+                      alt={shop.shopName}
+                      className="w-10 h-10 rounded-full border-2 border-white object-cover cursor-pointer transition-transform hover:scale-105"
+                    />
+                  </button>
                 ) : (
-                  <div className="h-20 sm:h-28 md:h-32 lg:h-36 w-full bg-gray-200 flex items-center justify-center text-gray-500 text-3xl sm:text-5xl">
+                  <div className="w-10 h-10 rounded-full border-2 border-white bg-gray-200 flex items-center justify-center text-gray-500 text-xl">
                     <FaStore />
                   </div>
                 )}
 
+                {/* Zoom Modal */}
                 {zoomedImage && (
                   <div
                     className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
-                    onClick={() => setZoomedImage(null)} // backdrop click se close
+                    onClick={() => setZoomedImage(null)} // backdrop click close
                   >
-                    {/* Stop propagation so clicking image doesn't close */}
                     <div
                       className="relative"
-                      onClick={(e) => e.stopPropagation()}
+                      onClick={(e) => e.stopPropagation()} // image click se close na ho
                     >
                       {/* Close Button */}
                       <button
