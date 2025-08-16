@@ -113,7 +113,7 @@ const UserDashboard = () => {
               <button
                 onClick={async () => {
                   try {
-                    await axios.post(`${api}/User/logout`, {}, { withCredentials: true }); // ✅ clear cookie on backend
+                    await axios.post(`${api}/api/user/logout`, {}, { withCredentials: true }); // ✅ clear cookie on backend
 
                     localStorage.removeItem("userId");
                     localStorage.removeItem("email");
