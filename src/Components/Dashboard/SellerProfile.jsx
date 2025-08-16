@@ -12,7 +12,7 @@ const SellerProfile = () => {
   useEffect(() => {
     const fetchSeller = async () => {
       try {
-        const { data } = await axios.get(`${api}/api/seller/profile`, {
+        const { data } = await axios.get(`${api}/api/seller/seller/profile`, {
           withCredentials: true, // ✅ send cookies automatically
         });
         setSeller(data);
