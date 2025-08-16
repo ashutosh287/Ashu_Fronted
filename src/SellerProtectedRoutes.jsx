@@ -11,7 +11,7 @@ const SellerProtectedRoutes = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get(`${api}/api/check-seller-token`, { withCredentials: true })
+      .get(`${api}/api/seller/check-seller-token`, { withCredentials: true })
       .then((res) => {
         setLoggedIn(res.data.loggedIn);
         setLoading(false);
