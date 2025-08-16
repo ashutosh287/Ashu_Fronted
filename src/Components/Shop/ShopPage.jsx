@@ -5,7 +5,7 @@ import { FaOpencart, FaStore } from 'react-icons/fa';
 import { showSuccessToast, showErrorToast } from "../ToastifyNotification/Notification";
 import Search from './SearchBar';
 import '../../index.css';
-import {api} from "../../../GlobalUrl"
+const api = import.meta.env.VITE_BASE_URL;
 
 const ShopPage = () => {
   const { id } = useParams();

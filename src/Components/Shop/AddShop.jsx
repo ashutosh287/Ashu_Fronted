@@ -44,7 +44,7 @@ const AddShop = () => {
           shopkeeperImage: shopkeeperImageUrl,
         };
 
-        await axios.post(`${api}/api/add-shop`, finalData);
+        await axios.post(`${api}/api/seller/add-shop`, finalData);
         showSuccessToast("Shop registered successfully!");
         navigate("/thanks");
       } catch (error) {
