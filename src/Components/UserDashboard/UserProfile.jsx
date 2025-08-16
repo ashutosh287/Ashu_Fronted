@@ -11,7 +11,7 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`${api}/User/profile`, {
+        const res = await axios.get(`${api}/api/user/profile`, {
           withCredentials: true, // ✅ So that cookie goes with request
         });
         setUser(res.data);

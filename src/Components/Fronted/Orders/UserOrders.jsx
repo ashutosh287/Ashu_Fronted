@@ -12,8 +12,8 @@ const CombinedOrders = () => {
     const fetchOrders = async () => {
       try {
         const [userRes, readyRes] = await Promise.all([
-          axios.get(`${api}/User/orders`, { withCredentials: true }), // all user orders
-          axios.get(`${api}/User/orders/ready`, { withCredentials: true }), // ready orders
+          axios.get(`${api}/api/user/orders`, { withCredentials: true }), // all user orders
+          axios.get(`${api}/api/user/orders/ready`, { withCredentials: true }), // ready orders
         ]);
 
         setUserOrders(userRes.data);
