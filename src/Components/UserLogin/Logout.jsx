@@ -10,7 +10,7 @@ const Logout = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post(`${api}/user/logout`, {}, {
+      await axios.post(`${api}/api/user/logout`, {}, {
         withCredentials: true,
       });
 

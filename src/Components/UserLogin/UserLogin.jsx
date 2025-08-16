@@ -25,7 +25,7 @@ export default function Login({ setIsLogin }) {
                 setIsLoading(true);
 
                 const response = await axios.post(
-                    `${api}/User/login`,
+                    `${api}/api/user/login`,
                     values,
                     { withCredentials: true } // ✅ Send and receive secure HTTP-only cookie
                 );
