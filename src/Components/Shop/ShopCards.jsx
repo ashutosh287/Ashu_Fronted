@@ -96,14 +96,17 @@ const ShopCards = () => {
                 {zoomedImage && (
                   <div
                     className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
-                    onClick={() => setZoomedImage(null)} // overlay click = close
+                    onClick={() => setZoomedImage(null)} // overlay click par close
                   >
-                    {/* Stop propagation for image */}
-                    <div onClick={(e) => e.stopPropagation()}>
+                    {/* Inner container (stopPropagation so overlay click & image click separate ho jaye) */}
+                    <div
+                      className="relative"
+                      onClick={(e) => e.stopPropagation()} // image ya button par click se overlay trigger na ho
+                    >
                       {/* Close Button */}
                       <button
                         onClick={() => setZoomedImage(null)}
-                        className="absolute top-4 right-4 text-white text-3xl font-bold hover:text-red-400 transition"
+                        className="absolute -top-6 -right-6 bg-red-600 text-white rounded-full w-10 h-10 flex items-center justify-center text-2xl font-bold shadow-lg hover:bg-red-500 transition"
                         aria-label="Close"
                       >
                         &times;
@@ -113,7 +116,7 @@ const ShopCards = () => {
                       <img
                         src={zoomedImage}
                         alt="Zoomed shop"
-                        className="max-w-[90%] max-h-[90%] rounded-xl shadow-lg border-4 border-white"
+                        className="max-w-[90vw] max-h-[90vh] rounded-xl shadow-lg border-4 border-white"
                       />
                     </div>
                   </div>
