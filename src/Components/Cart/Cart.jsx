@@ -25,7 +25,7 @@ const Cart = () => {
         await axios.get(`${api}/api/user/check-auth`, { withCredentials: true });
 
         // ✅ Fetch cart after auth passes
-        const res = await axios.get(`${api}/api/cart/${shopId}`, {
+        const res = await axios.get(`${api}/cart/${shopId}`, {
           withCredentials: true,
         });
         setCartItems(res.data);
