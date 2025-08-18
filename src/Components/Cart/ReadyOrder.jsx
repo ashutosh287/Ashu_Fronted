@@ -85,6 +85,14 @@ const PlaceOrderWithType = () => {
     try {
       const deliveryTime = ispreferredPackedTime ? "immediate" : values.preferredPackedTime;
 
+      const formattedItems = cartItems.map((item) => ({
+        productId: item.productId || item._id, // ensure productId exists
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+        image: item.image,
+      }));
+
       const res = await axios.post(
         `${api}/api/Rorder`,
         {
@@ -96,7 +104,7 @@ const PlaceOrderWithType = () => {
           orderNotes: values.orderNotes,
           orderType: values.orderType,
           totalAmount,
-          items: cartItems,
+          items: formattedItems,
         },
         { withCredentials: true }
       );
@@ -115,10 +123,16 @@ const PlaceOrderWithType = () => {
 
       navigate("/ReadyOrderSummary");
     } catch (error) {
-      console.error("❌ Order failed:", error);
-      setError("Failed to place order.");
+      if (error.response) {
+        console.error("❌ Order failed:", error.response.data);
+        setError(error.response.data.message || "Failed to place order.");
+      } else {
+        console.error("❌ Order failed:", error.message);
+        setError("Failed to place order. Server not reachable.");
+      }
     }
   };
+
 
   return (
     <section className="bg-gray-50 min-h-screen px-3 py-6 sm:px-6 flex justify-center">
