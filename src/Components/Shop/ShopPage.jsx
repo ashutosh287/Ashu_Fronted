@@ -153,7 +153,7 @@ const ShopPage = () => {
             <Search shopId={id} onProductSelect={scrollToProduct} />
           </div>
 
-          <Link to={`/api/cart/${shop._id}`} className="ml-auto hidden sm:block">
+          <Link to={`/cart/${shop._id}`} className="ml-auto hidden sm:block">
             <FaOpencart className="text-3xl hover:text-purple-200 transition duration-200" />
           </Link>
         </div>
