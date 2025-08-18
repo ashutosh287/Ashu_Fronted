@@ -91,7 +91,7 @@ const renderOrders = (groupedOrders, type = 'user') =>
                   <p>👤 {order.buyerName || order.fullName}</p>
                   <p>📞 {order.phone}</p>
                   {order.address && <p>📍 {order.address}</p>}
-                  <p>⏰ {order.preferredDeliveryTime}</p>
+                  <p>⏰ {order.preferredPackedTime}</p>
                   {type === 'ready' && (
                     <>
                       <p>📝 {order.orderNotes || "No Notes"}</p>
