@@ -144,14 +144,9 @@ const ShopPage = () => {
                 <p className="text-xs sm:text-sm opacity-90 truncate">Owner: {shop?.ownerName}</p>
               </div>
               <div className="sm:hidden">
-                <Link
-                  to={`/cart/${shop._id}`}
-                  className="flex flex-col items-center hover:text-purple-200 transition"
-                >
-                  <HiOutlineShoppingCart className="text-2xl text-white" />
-                  <span className="text-sm text-white">Cart</span>
+                <Link to={`/cart/${shop._id}`}>
+                  <HiOutlineShoppingCart className="text-2xl text-white hover:text-purple-200 transition" />
                 </Link>
-
               </div>
             </div>
           </div>
@@ -160,14 +155,9 @@ const ShopPage = () => {
             <Search shopId={id} onProductSelect={scrollToProduct} />
           </div>
 
-          <Link
-            to={`/cart/${shop._id}`}
-            className="ml-auto hidden sm:flex flex-col items-center hover:text-purple-200 transition duration-200"
-          >
-            <HiOutlineShoppingCart className="text-3xl" />
-            <span className="text-sm">Cart</span>
+          <Link to={`/cart/${shop._id}`} className="ml-auto hidden sm:block">
+            <HiOutlineShoppingCart className="text-3xl hover:text-purple-200 transition duration-200" />
           </Link>
-
         </div>
       </nav>
 
