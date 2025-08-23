@@ -1,1 +1,0 @@
-export const api = 'https://ashu-backend.vercel.app'
